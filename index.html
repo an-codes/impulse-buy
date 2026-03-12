@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Should I Buy It? 🌸</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+
+        body {
+          font-family: 'Quicksand', 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif;
+          background: linear-gradient(135deg, #ffd6e7, #e6d9ff);
+          background-repeat: no-repeat;
+          background-size: cover;
+          min-height: 100vh;
+          text-align: center;
+          padding: 10px;
+          color: #5a4a57;
+          position: relative;
+        }
+
+        .container{
+          background:white;
+          max-width:420px;
+          margin:auto;
+          padding: 10px;
+          border-radius:50px;
+          box-shadow:0 10px 25px rgba(0,0,0,0.08);
+          position: relative;
+          z-index: 1;
+        }
+
+        h1{
+          color:#ff6fb0;
+          margin-top: 10px;
+        }
+
+        input,select{
+          width:80%;
+          padding:12px;
+          margin:10px;
+          border-radius:12px;
+          border:2px solid #ffd6e7;
+          font-size:16px;
+        }
+
+        button{
+          background:#ff8cc6;
+          border:none;
+          padding:12px 25px;
+          border-radius:20px;
+          font-size:16px;
+          color:white;
+          cursor:pointer;
+          margin-top:10px;
+          transition:0.2s;
+        }
+
+        button:hover{
+          background:#ff6fb0;
+        }
+
+        #result{
+          margin-top:25px;
+          font-size:18px;
+        }
+
+        .big{
+          font-size:22px;
+          font-weight:600;
+          color:#ff6fb0;
+        }
+
+        .note{
+          font-size:12px;
+          margin-top:15px;
+          opacity:0.7;
+        }
+
+        .bg-icon {
+          position: absolute;
+          width: 20px;
+          height: 20px;
+          opacity: 0.8;
+        }
+
+        .logo {
+          margin-bottom: 10px;
+          display: flex;
+          justify-content: center;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="logo">
+        <img src="wallet.png" alt="Wallet Logo" style="width:130px; height:130px; padding: 10px; z-index: 2;">
+    </div>
+
+    <h1>🌸 Should I Buy It? 💖</h1>
+
+    <p>Convert impulse buys into life hours ✨</p>
+
+    <input id="price" type="number" placeholder="Item price (£)">
+    <br>
+
+    <select id="payType">
+        <option value="hourly">Hourly Pay</option>
+        <option value="yearly">Yearly Salary</option>
+    </select>
+
+    <br>
+
+    <input id="pay" type="number" placeholder="Your pay (£)">
+    <br>
+
+    <button onclick="calculate()">Calculate ✨</button>
+
+    <div id="result"></div>
+
+    <p class="note">Approximate calculation — taxes not included</p>
+
+</div>
+
+<script>
+
+    function calculate(){
+
+    const price = parseFloat(document.getElementById("price").value);
+    const pay = parseFloat(document.getElementById("pay").value);
+    const type = document.getElementById("payType").value;
+
+    if(!price || !pay){
+      document.getElementById("result").innerHTML="🌸 Enter both values first!";
+      return;
+    }
+
+    let hourlyRate;
+
+    if(type === "yearly"){
+      hourlyRate = pay / 2080;
+    }else{
+      hourlyRate = pay;
+    }
+
+    const hours = price / hourlyRate;
+    const minutes = hours * 60;
+
+    const coffee = price / 3.5;
+    const spotify = price / 10.99;
+    const therapy = price / 70;
+    const pt = price / 40;
+    const trip = (price / 300) * 100;
+
+    document.getElementById("result").innerHTML = `
+    <p class="big"><img src="clock.png" alt="Clock" style="width:24px; height:24px; vertical-align: middle; margin-right: 5px;"> ${hours.toFixed(1)} hours (${minutes.toFixed(0)} minutes) of your life</p>
+
+    <p>That's equivalent to:</p>
+
+    <div style="display: flex; align-items: center; margin-bottom: 15px;">
+        <img src="coffee.png" alt="Coffee" style="width:20px; height:20px; margin-right: 20px;"> ${coffee.toFixed(1)} coffees
+    </div>
+    <div style="display: flex; align-items: center; margin-bottom: 15px;">
+        <img src="spotify.png" alt="Spotify" style="width:20px; height:20px; margin-right: 20px;"> ${spotify.toFixed(1)} months of Spotify
+    </div>
+    <div style="display: flex; align-items: center; margin-bottom: 15px;">
+        <img src="gym.png" alt="Gym" style="width:20px; height:20px; margin-right: 20px;"> ${pt.toFixed(1)} PT sessions
+    </div>
+    <div style="display: flex; align-items: center; margin-bottom: 15px;">
+        <img src="travel.png" alt="Travel" style="width:20px; height:20px; margin-right: 20px;"> ${trip.toFixed(0)}% of a weekend trip fund
+    </div>
+        <div style="display: flex; align-items: center; margin-bottom: 15px;">
+        <img src="brain.png" alt="Therapy" style="width:20px; height:20px; margin-right: 20px;"> ${therapy.toFixed(0)}% therapy sessions
+    </div>
+    `;
+
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const images = ["bow1.png", "bow2.png", "bow3.png", "bow4.png", "hearts.png", "flower.png", "rose.png", "sparkles.png"];
+        const body = document.body;
+        const rows = 15; // Number of rows in the grid
+        const cols = 15; // Number of columns in the grid
+        let imageIndex = 0; // To cycle through images evenly
+
+        for (let row = 0; row < rows; row++) {
+            for (let col = 0; col < cols; col++) {
+                const img = document.createElement("img");
+                img.src = images[imageIndex];
+                img.style.position = "absolute";
+                img.style.width = "20px";
+                img.style.height = "20px";
+
+                // Regular placement within the grid cell
+                const topOffset = (100 / rows) * 0.25;
+                const leftOffset = (100 / cols) * 0.25;
+
+                img.style.top = `${row * (100 / rows) + topOffset}%`;
+                img.style.left = `${col * (100 / cols) + leftOffset}%`;
+                img.style.opacity = "0.8";
+                body.appendChild(img);
+
+                imageIndex = (imageIndex + 1) % images.length;
+            }
+        }
+
+        document.body.style.overflow = "auto"; //scrolling
+        document.body.style.position = "relative";
+    });
+
+</script>
+
+</body>
+</html>
