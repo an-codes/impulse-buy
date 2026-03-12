@@ -1,6 +1,6 @@
 # impulse-buy application
 
-Ready for use: https://an-codes.github.io/impulse-buy/
+Ready: https://an-codes.github.io/impulse-buy/
 
 # 🌸 Should I Buy It?
 
